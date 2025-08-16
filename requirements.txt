@@ -1,0 +1,9 @@
+numpy
+torch>=2.2
+sentencepiece
+pyyaml
+fastapi
+uvicorn
+sse-starlette
+orjson
+regex

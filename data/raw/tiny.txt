@@ -1,0 +1,2 @@
+Transformers are neural networks with self-attention.
+They model sequences autoregressively.

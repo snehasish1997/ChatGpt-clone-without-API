@@ -1,0 +1,18 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+
+# Checkpoints and large binaries
+ckpts/
+*.pt
+*.bin
+
+# Data you’ll regenerate locally
+data/raw/
+data/spm/
+data/sft/
+
+# OS noise
+.DS_Store
+Thumbs.db
