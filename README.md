@@ -1,4 +1,5 @@
-# Local ChatGPT (No APIs) — From Scratch
+#This is the initial work of my project. This is not the full code, just an overview of my work. I have not uploaded the complete code yet.
+# ChatGPT Clone (with out using any api)
 
 A minimal end-to-end chat system that runs **fully local**. No external LLM APIs. It includes:
 
