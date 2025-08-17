@@ -1,5 +1,5 @@
 #This is the initial work of my project. This is not the full code, just an overview of my work. I have not uploaded the complete code yet.
-# ChatGPT Clone (with out using any api)
+# ChatGPT Clone (without using any api)
 
 # This project does not use OpenAI’s API and is not affiliated with OpenAI or other AI model
 
