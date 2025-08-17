@@ -1,17 +1,20 @@
 #This is the initial work of my project. This is not the full code, just an overview of my work. I have not uploaded the complete code yet.
 # ChatGPT Clone (with out using any api)
 
-A minimal end-to-end chat system that runs **fully local**. No external LLM APIs. It includes:
+# This project does not use OpenAI’s API and is not affiliated with OpenAI or other AI model
 
-- A small **decoder-only Transformer** with masked **self-attention** (PyTorch)
-- **SentencePiece** tokenizer with chat role tags (`<|system|>`, `<|user|>`, `<|assistant|>`)
-- **LoRA** adapters for cheap instruction fine-tuning
-- **Instruction data generator** from your own text files
-- **SSE streaming** backend for token-by-token UI
-- Lightweight **ChatGPT-style web UI**
-- **Evaluation** scripts (perplexity & simple task accuracy)
+**This project is not a regular API-based web application. I trained the model from scratch and built a web interface where users can directly interact with it.**
 
-> This is a learning scaffold. Quality improves with more data, more compute, and longer training.
+
+This is an end-to-end chat system. There is nor external APIs. It includes:
+
+- Transformer with masked self-attention (PyTorch)
+- SentencePiece tokenizer with chat role tags 
+- LoRA adapters for cheap instruction fine-tuning
+- SSE streaming backend for token-by-token UI
+- Make ChatGPT-style web UI
+- Evaluation scripts (perplexity & simple task accuracy)
+
 
 ---
 
@@ -19,7 +22,7 @@ A minimal end-to-end chat system that runs **fully local**. No external LLM APIs
 
 - Python 3.9+
 - pip
-- (Optional) NVIDIA GPU with CUDA for faster training/inference
+- NVIDIA GPU with CUDA for faster training
 
 Install Python deps inside a virtualenv:
 ```bash
@@ -34,12 +37,12 @@ pip install -r requirements.txt
 
 ### 1) Train SentencePiece
 ```bash
-python src/data/build_tokenizer.py --input_glob "data/raw/*.txt" --model_prefix data/spm/localgpt --vocab_size 4000
+python src/data/build_tokenizer.py --input_glob "data/raw/*.txt" --model_prefix data/spm/chatgpt --vocab_size 4000
 ```
 
 ### 2) Pre-train a tiny base model
 ```bash
-python src/train/pretrain.py --config configs/tiny.yml --spm data/spm/localgpt.model --out_dir ckpts/tiny
+python src/train/pretrain.py --config configs/tiny.yml --spm data/spm/chatgpt.model --out_dir ckpts/tiny
 ```
 
 ### 3) Generate instruction data
@@ -54,14 +57,14 @@ python src/train/finetune_lora.py --base_ckpt ckpts/tiny --spm data/spm/localgpt
 
 ### 5) Run the backend
 ```bash
-python src/server/serve.py --ckpt ckpts/tiny-lora --spm data/spm/localgpt.model --host 127.0.0.1 --port 8000
+python src/server/serve.py --ckpt ckpts/tiny-lora --spm data/spm/chatgpt.model --host 127.0.0.1 --port 3000
 ```
 
 ### 6) Open the web UI
 ```bash
 cd web
-python -m http.server 5173
-# then open http://localhost:5173
+python -m http.server 3000
+# then open http://localhost:3000
 ```
 
 ---
@@ -69,8 +72,8 @@ python -m http.server 5173
 ## Evaluation
 
 ```bash
-python src/eval/perplexity.py --ckpt ckpts/tiny-lora --spm data/spm/localgpt.model
-python src/eval/task_accuracy.py --ckpt ckpts/tiny-lora --spm data/spm/localgpt.model
+python src/eval/perplexity.py --ckpt ckpts/tiny-lora --spm data/spm/chatgpt.model
+python src/eval/task_accuracy.py --ckpt ckpts/tiny-lora --spm data/spm/chatgpt.model
 ```
 
 ---
@@ -89,11 +92,11 @@ localgpt/
 
 ## Tips
 - Start with `configs/tiny.yml` to verify the pipeline, then scale up.
-- Put your domain text into `data/raw/` before training.
-- The instruction generator is rule-based; extend it to fit your tasks.
+- we have to Put own domain text into `data/raw/` before training.
+- The instruction generator is rule-based;
 - To speed up: use a GPU and increase training steps.
 
 ---
 
 ## License
-This scaffold is for learning and local experimentation. Review licenses of dependencies and datasets you use.
+This scaffold is for learning and local experimentation.
