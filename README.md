@@ -1,4 +1,4 @@
-# This is the initial work of my project. It is not the full code, just an overview of my work. I have not uploaded the complete code yet as it is part of my own research
+**This is the initial work of my project. It is not the full code, just an overview of my work. I have not uploaded the complete code yet as it is part of my own research**
 
 # ChatGPT Clone (without using any api)
 
